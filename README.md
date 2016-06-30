@@ -1,2 +1,2 @@
 # issues
-fmadio issue tracking
+public fmadio issue tracking
