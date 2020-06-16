@@ -1,0 +1,12 @@
+name                  , frequency      ,  description                                        , example
+capture start         , event          , capture start                                       , 
+capture stop          , event          , capture stop                                        , 
+packet drop           , event          , packet drop occoured                                , 
+device temperature    , every 1 min    , statistics on the device temperature                , Temp      (CPU0:39.00 CPU1:42.00 PCH:48.00 SYS:40.00 PER:0.00)   
+disk io statistics    , every 1 min    , statistics on the disk io                           , DiskIO    (Rd:  0.00Gbps Wr:  0.00Gbps) 
+capture statistics    , every 1 min    , current active capture statistics                   , Capture   (Enb: 0 Pkt: 0 Drop: 0 FCSError: 0 CaptureRateRate 0.00000000 Gbps)
+writeback statistics  , every 1 min    , statistics on writeback to disk                     , Mem (0.00GB ECC 0) Writeback (0.00GB) Dropped (0.00GB) 
+port link status      , every 1 min    , capture port link status                            , Link Port (1 1 0 0 0 0 0 0 ) 
+disk temperature      , every 1 min    , hba disk (ssd and hdd) temperature information      , HBA(0 0 0 ) Disk   (33 34 33 32 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 66 36 42 35 43 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+analytics start       , event          , analytics process has started                       ,
+analytics stop        , event          , analytics process has stopped                       ,
