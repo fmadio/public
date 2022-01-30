@@ -11,7 +11,7 @@ The default static IP address is 192.168.1.10/24 GW:192.168.1.1
 
 LXC Config as follows
 
-'''
+```
 # Distribution configuration
 lxc.include = /usr/share/lxc/config/centos.common.conf
 lxc.arch = x86_64
@@ -29,5 +29,4 @@ lxc.net.0.ipv4.gateway = 192.168.1.1
 
 # map passthru queue 
 lxc.mount.entry = /opt/fmadio/queue/lxc_ring0 opt/fmadio/queue/lxc_ring0 none bind,create=file 0 0  
-'''
-
+```
