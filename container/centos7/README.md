@@ -184,3 +184,52 @@ DNS1=192.168.1.1
 
 To change the static IP address please update both files appropriately 
 
+
+# Running
+
+Booting the container use the following command
+
+```
+sudo lxc-start -n centos7
+```
+
+then attach to the console as follows 
+
+```
+sudo lxc-attach -n centos7
+```
+
+This will drop to a shell allowing further configuration and customization.
+
+Example shown below
+
+
+```
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc# lxc-start -n centos7
+
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc# lxc-attach -n centos7
+
+root@centos7:/# ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.2.206  netmask 255.255.255.0  broadcast 192.168.2.255
+        inet6 fe80::f05a:98ff:fe56:9928  prefixlen 64  scopeid 0x20<link>
+        ether f2:5a:98:56:99:28  txqueuelen 1000  (Ethernet)
+        RX packets 48  bytes 15088 (14.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 13  bytes 916 (916.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+root@centos7:/#
+```
+
+
+
