@@ -231,4 +231,37 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 root@centos7:/#
 ```
 
+# Container Packet Capture 
 
+The CentOS image has a version of the FMADIO Platform installed, its recommened to get the latest version using GIT.
+
+
+```
+root@centos7:~# cd /opt/fmadio/platform/
+root@centos7:/opt/fmadio/platform# git pull
+Already up-to-date.
+root@centos7:/opt/fmadio/platform#
+
+```
+
+Packets can then be captured using the tool "fmadio2pcap" which is fully opensource, its used as a minimial code example on how to receive and process packets within a container. 	Source code is here [https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c](https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c)
+
+
+### Process Historical Capture
+
+Execute in the container 
+
+```
+root@centos7:/opt/fmadio/platform/fmadio2pcap# ./fmadio2pcap  -i /opt/fmadio/queue/lxc_ring0 | tcpdump  -r - -nn
+fmadio2pcap
+FMAD Ring [/opt/fmadio/queue/lxc_ring0]
+Ring size   : 10489868 10489868 16777216
+Ring Version:      100      100
+RING: Put:98c817f0
+RING: Get:98c817f0
+.
+.
+.
+```
+
+Execute on FMADIO Host

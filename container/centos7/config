@@ -12,14 +12,14 @@ lxc.include = /usr/share/lxc/config/centos.common.conf
 lxc.arch = x86_64
 
 # Container specific configuration
-lxc.rootfs.path = dir:/opt/fmadio/lxc/lib/lxc/centos7/rootfs
-lxc.uts.name = centos
+lxc.rootfs.path = dir:/opt/fmadio/lxc/centos7/rootfs
+lxc.uts.name = centos7
 
 # Network configuration
 lxc.net.0.type = veth
 lxc.net.0.link = man0
 lxc.net.0.flags = up
-lxc.net.0.ipv4.address = 192.168.1.10
+lxc.net.0.ipv4.address = 192.168.1.11
 lxc.net.0.ipv4.gateway = 192.168.1.1
 
 # map passthru queue 
