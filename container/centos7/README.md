@@ -145,14 +145,14 @@ lxc.include = /usr/share/lxc/config/centos.common.conf
 lxc.arch = x86_64
 
 # Container specific configuration
-lxc.rootfs.path = dir:/opt/fmadio/lxc/lib/lxc/centos7/rootfs
-lxc.uts.name = centos
+lxc.rootfs.path = dir:/opt/fmadio/lxc/centos7/rootfs
+lxc.uts.name = centos7
 
 # Network configuration
 lxc.net.0.type = veth
 lxc.net.0.link = man0
 lxc.net.0.flags = up
-lxc.net.0.ipv4.address = 192.168.1.10
+lxc.net.0.ipv4.address = 192.168.1.11
 lxc.net.0.ipv4.gateway = 192.168.1.1
 
 # map passthru queue 
@@ -176,7 +176,7 @@ HOSTNAME=centos
 NM_CONTROLLED=no
 TYPE=Ethernet
 MTU=
-IPADDR=192.168.1.10
+IPADDR=192.168.1.11
 PREFIX=24
 GATEWAY=192.168.1.1
 DNS1=192.168.1.1
@@ -205,9 +205,9 @@ Example shown below
 
 
 ```
-root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc# lxc-start -n centos7
+root@fmadioMAG-290:# lxc-start -n centos7
 
-root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc# lxc-attach -n centos7
+root@fmadioMAG-290:# lxc-attach -n centos7
 
 root@centos7:/# ifconfig
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -249,19 +249,93 @@ Packets can then be captured using the tool "fmadio2pcap" which is fully opensou
 
 ### Process Historical Capture
 
-Execute in the container 
+
+#### Execute on FMADIO Host
+
+Start the FMADIO Packet Capture Tx Path. This has full flow control ensuring there are Zero Packet drops. On the host system find the capture file to send to the container and run
+
 
 ```
-root@centos7:/opt/fmadio/platform/fmadio2pcap# ./fmadio2pcap  -i /opt/fmadio/queue/lxc_ring0 | tcpdump  -r - -nn
+sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring0
+```
+
+Example output as follows
+
+
+```
+fmadio@fmadio20v3-287:/mnt/store0/git/platform_20220120_rc1/include$ sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring0
+outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
+Ring size   : 10489868 16777216
+Ring Version:      100      100
+RING: Put:5638
+RING: Get:5638
+0M Offset:    0GB ChunkID:65417929 TS:00:00:14.506.442.653 | Pending  10665 MB 1.007Gbps 0.414Mpps CPUIdle:0.000 CPUFetch:0.137 CPUSend:0.000
+1M Offset:    1GB ChunkID:65423026 TS:01:02:05.528.618.296 | Pending   9391 MB 10.550Gbps 1.068Mpps CPUIdle:0.000 CPUFetch:0.174 CPUSend:0.000
+2M Offset:    2GB ChunkID:65428016 TS:01:53:07.401.746.274 | Pending   8144 MB 10.332Gbps 1.038Mpps CPUIdle:0.000 CPUFetch:0.150 CPUSend:0.000
+3M Offset:    3GB ChunkID:65433020 TS:02:23:40.771.210.710 | Pending   6892 MB 10.365Gbps 0.990Mpps CPUIdle:0.000 CPUFetch:0.155 CPUSend:0.000
+4M Offset:    4GB ChunkID:65437915 TS:03:00:17.830.519.599 | Pending   5669 MB 10.109Gbps 1.086Mpps CPUIdle:0.000 CPUFetch:0.288 CPUSend:0.000
+.
+.
+.
+.
+```
+
+
+#### Execute in the  Container 
+
+```
+[fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | tcpdump  -r - -nn | head -n 100
 fmadio2pcap
 FMAD Ring [/opt/fmadio/queue/lxc_ring0]
 Ring size   : 10489868 10489868 16777216
 Ring Version:      100      100
-RING: Put:98c817f0
-RING: Get:98c817f0
+RING: Put:4d93
+RING: Get:4d93
+reading from file -, link-type EN10MB (Ethernet)
+00:11:08.562510 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 2377520938:2377522386, ack 3714236327, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562523 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 1448:2896, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562529 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 4294944128, win 10578, options [nop,nop,TS val 3394241810 ecr 3075767777], length 0
+00:11:08.562535 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 2896:4344, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562547 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 4344:5792, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562559 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 5792:7240, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562572 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 7240:8688, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562584 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 8688:10136, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562596 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 10136:11584, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562609 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 11584:13032, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562621 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 13032:14480, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562633 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 14480:15928, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562646 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 15928:17376, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562652 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 4294948472, win 10594, options [nop,nop,TS val 3394241811 ecr 3075767777], length 0
+00:11:08.562658 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 17376:18824, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562670 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 18824:20272, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562674 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 4294958608, win 10594, options [nop,nop,TS val 3394241811 ecr 3075767777], length 0
+00:11:08.562683 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 20272:21720, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562695 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 21720:23168, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562707 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 23168:24616, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562719 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 24616:26064, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562732 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 26064:27512, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562744 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 27512:28960, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562756 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 28960:30408, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562768 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 30408:31856, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562781 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 31856:33304, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562793 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 33304:34752, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562799 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 5792, win 10594, options [nop,nop,TS val 3394241811 ecr 3075767777], length 0
+00:11:08.562806 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 34752:36200, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562818 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 36200:37648, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562830 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 37648:39096, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562843 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 39096:40544, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562855 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 40544:41992, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562867 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 41992:43440, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562879 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 43440:44888, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562892 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 44888:46336, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+00:11:08.562904 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 46336:47784, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
+.
 .
 .
 .
 ```
+We use tcpdump for example purposes, the utlity fmadio2pcap outputs a stnadard PCAP with Nanosecond timestamps. Any application that uses this format will work 
 
-Execute on FMADIO Host
+
+### Process Live Capture 
+
