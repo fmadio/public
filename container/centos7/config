@@ -1,0 +1,26 @@
+# Template used to create this container: /usr/share/lxc/templates/lxc-download
+# Parameters passed to the template:
+# For additional config options, please look at lxc.container.conf(5)
+
+# Uncomment the following line to support nesting containers:
+#lxc.include = /usr/share/lxc/config/nesting.conf
+# (Be aware this has security implications)
+
+
+# Distribution configuration
+lxc.include = /usr/share/lxc/config/centos.common.conf
+lxc.arch = x86_64
+
+# Container specific configuration
+lxc.rootfs.path = dir:/opt/fmadio/lxc/lib/lxc/centos7/rootfs
+lxc.uts.name = centos
+
+# Network configuration
+lxc.net.0.type = veth
+lxc.net.0.link = man0
+lxc.net.0.flags = up
+lxc.net.0.ipv4.address = 192.168.1.10
+lxc.net.0.ipv4.gateway = 192.168.1.1
+
+# map passthru queue 
+lxc.mount.entry = /opt/fmadio/queue/lxc_ring0 opt/fmadio/queue/lxc_ring0 none bind,create=file 0 0  
