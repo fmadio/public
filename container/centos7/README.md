@@ -247,7 +247,7 @@ root@centos7:/opt/fmadio/platform#
 Packets can then be captured using the tool "fmadio3pcap" which is fully opensource, its used as a minimial code example on how to receive and process packets within a container. 	Source code is here [https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c](https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c)
 
 
-### Process Historical Capture
+## Process Historical Capture
 
 
 **Execute FMADIO Host**
@@ -263,7 +263,7 @@ Example output as follows
 
 
 ```
-fmadio@fmadio20v3-287:/mnt/store0/git/platform_20220120_rc1/include$ sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring0
+fmadio@fmadio20v3-287:$ sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring0
 outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
 Ring size   : 10489868 16777216
 Ring Version:      100      100
@@ -284,6 +284,7 @@ RING: Get:5638
 **Execute Container**
 
 ```
+[fmadio@centos7 fmadio2pcap]$ cd /opt/fmadio/platform/fmadio2pcap 
 [fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | tcpdump  -r - -nn | head -n 100
 fmadio2pcap
 FMAD Ring [/opt/fmadio/queue/lxc_ring0]
@@ -337,5 +338,154 @@ reading from file -, link-type EN10MB (Ethernet)
 We use tcpdump for example purposes, the utlity fmadio2pcap outputs a stnadard PCAP with Nanosecond timestamps. Any application that uses this format will work 
 
 
-### Process Live Capture 
+## Process Live Capture 
+
+Recommend using a 1sec flush period to ensure data gets delivered at a regular interval. Otherwise the frequency of when data is seen depends on the link activity. 
+
+(Setting 1sec flush interval)[https://docs.fmad.io/fmadio-documentation/configuration/capture-pipeline-flush#flushperiod]
+
+Example setting (/opt/fmadio/etc/time.lua)
+
+```
+["Capture"] =
+{
+	["FlushPktCnt"] = 2000,
+	["FlushPeriod"] = 1e9,
+	["FlushIdle"]   = 0,
+},
+
+```
+
+Start the packet capture system
+
+
+**Execute FMADIO Host**
+
+
+```
+fmadio@fmadio20v3-287:$ sudo stream_cat -v --follow --ring /opt/fmadio/queue/lxc_ring0
+stream_cat: follow mode
+outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
+Ring size   : 10489868 16777216
+Ring Version:      100      100
+RING: Put:942d96
+RING: Get:942d96
+0M Offset:    0GB ChunkID:65468565 TS:00:00:00.000.000.000 | Pending     21 MB 0.000Gbps 0.000Mpps CPUIdle:0.000 CPUFetch:0.787 CPUSend:0.000
+0M Offset:    0GB ChunkID:65468631 TS:00:00:00.000.000.000 | Pending      8 MB 0.022Gbps 0.003Mpps CPUIdle:0.981 CPUFetch:0.006 CPUSend:0.000
+0M Offset:    0GB ChunkID:65468637 TS:09:58:01.151.885.306 | Pending      8 MB 0.008Gbps 0.001Mpps CPUIdle:0.998 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65468645 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.999 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65468660 TS:09:58:04.680.546.967 | Pending      8 MB 0.007Gbps 0.001Mpps CPUIdle:0.998 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65468683 TS:09:58:09.057.469.788 | Pending     10 MB 0.015Gbps 0.002Mpps CPUIdle:0.997 CPUFetch:0.001 CPUSend:0.000
+0M Offset:    0GB ChunkID:65468710 TS:09:58:10.382.692.610 | Pending      8 MB 0.040Gbps 0.004Mpps CPUIdle:0.995 CPUFetch:0.002 CPUSend:0.000
+0M Offset:    0GB ChunkID:65468716 TS:09:58:10.393.894.920 | Pending      8 MB 0.012Gbps 0.001Mpps CPUIdle:0.998 CPUFetch:0.000 CPUSend:0.000
+.
+.
+.
+.
+
+```
+
+**Execute Container**
+
+
+```
+[fmadio@centos7 fmadio2pcap]$ cd /opt/fmadio/platform/fmadio2pcap 
+[fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | tcpdump  -r - -nn  | head
+fmadio2pcap
+FMAD Ring [/opt/fmadio/queue/lxc_ring0]
+Ring size   : 10489868 10489868 16777216
+Ring Version:      100      100
+RING: Put:953f66
+RING: Get:953f66
+reading from file -, link-type EN10MB (Ethernet)
+09:59:36.377127 IP 192.168.2.130 > 192.168.2.125: ICMP echo request, id 3256, seq 5820, length 64
+09:59:36.377157 IP 192.168.2.125 > 192.168.2.130: ICMP echo reply, id 3256, seq 5820, length 64
+09:59:36.378684 IP 210.193.124.58.991 > 124.120.36.246.22599: Flags [.], seq 1452:2904, ack 1, win 1783, length 1452
+09:59:36.378697 IP 210.193.124.58.991 > 124.120.36.246.22599: Flags [.], seq 2904:4356, ack 1, win 1783, length 1452
+09:59:36.378709 IP 210.193.124.58.991 > 124.120.36.246.22599: Flags [.], seq 4356:5808, ack 1, win 1783, length 1452
+09:59:36.378721 IP 210.193.124.58.991 > 124.120.36.246.22599: Flags [.], seq 5808:7260, ack 1, win 1783, length 1452
+.
+.
+.
+.
+```
+
+The data will ebb and flow based on the traffic volume. The processing is always fully lossless and based on how fast the Container software can recevied/process the data. Tcpdump is pretty slow so the thoughput wont be too high. 
+
+
+## Process Filtered Live Capture 
+
+
+In addition to Live data capture, filtering of the data before it gets sent to the Container is possible using standard BPF filters. The following example output sends ARP requests to the container.
+
+**Execute FMADIO Host**
+
+```
+fmadio@fmadio20v3-287:$ sudo stream_cat -v --follow --ring /opt/fmadio/queue/lxc_ring0  --bpf "arp"
+stream_cat: follow mode
+outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
+BPF Filter [arp]
+stream_cat ioqueue: 4
+Using Filename [asdf_20220130_0957]
+calibrating...
+0 : 2095077860           2.0951 cycles/nsec offset:4.922 Mhz
+Cycles/Sec 2095077860.0000 Std:       0 cycle std(  0.00000000) Target:2.10 Ghz
+StartChunkID: 65470683
+StartChunk: 65470683 Offset: 0 Stride: 1
+StartChunk: 65470683
+Ring size   : 10489868 16777216
+Ring Version:      100      100
+RING: Put:954430
+RING: Get:954430
+0M Offset:    0GB ChunkID:65470683 TS:00:00:00.000.000.000 | Pending     21 MB 0.000Gbps 0.000Mpps CPUIdle:0.000 CPUFetch:0.764 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470741 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.996 CPUFetch:0.002 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470748 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.998 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470752 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.999 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470757 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.999 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470761 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.999 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470766 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.999 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470772 TS:10:04:37.644.451.695 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.998 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470777 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.999 CPUFetch:0.000 CPUSend:0.000
+0M Offset:    0GB ChunkID:65470781 TS:00:00:00.000.000.000 | Pending      8 MB 0.000Gbps 0.000Mpps CPUIdle:0.999 CPUFetch:0.000 CPUSend:0.000
+.
+.
+.
+.
+.
+```
+
+**Execute Container**
+
+```
+[fmadio@centos7 fmadio2pcap]$ cd /opt/fmadio/platform/fmadio2pcap 
+[fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | tcpdump  -r - -nn
+fmadio2pcap
+FMAD Ring [/opt/fmadio/queue/lxc_ring0]
+Ring size   : 10489868 10489868 16777216
+Ring Version:      100      100
+RING: Put:9543f0
+RING: Get:9543f0
+reading from file -, link-type EN10MB (Ethernet)
+10:03:05.468490 ARP, Request who-has 192.168.2.130 tell 192.168.2.73, length 50
+10:03:05.468558 ARP, Reply 192.168.2.130 is-at 00:16:3e:bc:a1:6f, length 50
+10:03:08.380996 ARP, Request who-has 192.168.2.130 tell 192.168.2.125, length 50
+10:03:08.381030 ARP, Reply 192.168.2.130 is-at 00:16:3e:bc:a1:6f, length 50
+10:03:11.860161 ARP, Request who-has 192.168.2.65 tell 192.168.2.130, length 50
+10:03:11.860189 ARP, Reply 192.168.2.65 is-at 30:9c:23:df:f0:5f, length 50
+10:03:12.548218 ARP, Request who-has 192.168.2.223 tell 192.168.2.130, length 50
+10:03:12.548381 ARP, Reply 192.168.2.223 is-at 18:c0:4d:b4:0e:72, length 50
+10:03:16.337276 ARP, Request who-has 192.168.2.65 tell 192.168.2.205, length 50
+10:03:16.337313 ARP, Reply 192.168.2.65 is-at 30:9c:23:df:f0:5f, length 50
+10:03:21.492033 ARP, Request who-has 192.168.2.73 tell 192.168.2.130, length 50
+10:03:21.492146 ARP, Reply 192.168.2.73 is-at 00:25:90:fe:91:9c, length 50
+10:03:21.935424 ARP, Reply 192.168.2.185 is-at b4:2e:99:25:09:f9, length 50
+10:03:23.203941 ARP, Request who-has 192.168.2.205 tell 192.168.2.131, length 50
+.
+.
+.
+.
+.
+.
+```
+
 
