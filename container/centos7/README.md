@@ -30,7 +30,7 @@ All these interfaces utilize the "man0" virtual ethernet bridge, meaning while t
 While this example usses "man0" with physical network interface "phy0" a 1G RJ45 socket. This can be applied to the 10G/40G physical network interfaces "phy10" and "phy11" for higher management interface bandwidth.
 
 
-## Network Config
+## Config
 
 The FMADIO Host interface is configured using
 
@@ -41,7 +41,13 @@ For details see our user documentation [docs.fmad.io](https://docs.fmad.io/fmadi
 
 The containers network configuration by default is the static IP address is 192.168.1.10/24 Gateway 192.168.1.1 
 
-LXC Config as follows
+LXC Config is located in
+
+```
+/opt/fmadio/lxc/centos7/config
+```
+
+Default config is as follows
 
 ```
 # Distribution configuration
@@ -63,4 +69,28 @@ lxc.net.0.ipv4.gateway = 192.168.1.1
 lxc.mount.entry = /opt/fmadio/queue/lxc_ring0 opt/fmadio/queue/lxc_ring0 none bind,create=file 0 0  
 ```
 
+In addition the CentOS 7 network configuration file is located in
+
+
+```
+/opt/fmadio/lxc/centos7/rootfs/etc/sysconfig/network-scripts/ifcfg-eth0
+```
+
+Default configuration is as follows
+
+```
+DEVICE=eth0
+BOOTPROTO=none
+ONBOOT=yes
+HOSTNAME=centos
+NM_CONTROLLED=no
+TYPE=Ethernet
+MTU=
+IPADDR=192.168.1.10
+PREFIX=24
+GATEWAY=192.168.1.1
+DNS1=192.168.1.1
+```
+
+To change the static IP address please update both files appropriately 
 
