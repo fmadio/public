@@ -2,6 +2,94 @@
 
 Reference CentOS 7 FMADIO LXC Continer for use on FMADIO Packet Capture Systems.
 
+The image has a minimial  setup of
+- GCC / build essentials
+- basic networking tools
+- fmadio platform checkout (https://github.com/fmadio/platform)
+
+# Install 
+
+Download/Checkout the LXC Image file onto the FMADIO Packet Capture host system.
+
+Extract the contents of the tarball into /opt/fmadio/lxc/ running as sudo or root, example below 
+
+
+```
+root@fmadioMAG-290:/# cd /opt/fmadio/lxc/
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc#
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc# tar xfzv /mnt/store0/git/public/container/centos7/fmadio_lxc_centos7.9.tar.gz
+centos7/
+centos7/config
+centos7/rootfs/
+centos7/rootfs/sbin
+centos7/rootfs/tmp/
+centos7/rootfs/tmp/.font-unix/
+centos7/rootfs/tmp/.X11-unix/
+centos7/rootfs/tmp/.ICE-unix/
+centos7/rootfs/tmp/.Test-unix/
+centos7/rootfs/tmp/.XIM-unix/
+centos7/rootfs/srv/
+centos7/rootfs/var/
+centos7/rootfs/var/.updated
+centos7/rootfs/var/tmp/
+centos7/rootfs/var/gopher/
+centos7/rootfs/var/mail
+centos7/rootfs/var/db/
+centos7/rootfs/var/db/Makefile
+centos7/rootfs/var/db/sudo/
+centos7/rootfs/var/db/sudo/lectured/
+centos7/rootfs/var/db/sudo/lectured/fmadio
+centos7/rootfs/var/empty/
+centos7/rootfs/var/empty/sshd/
+centos7/rootfs/var/cache/
+centos7/rootfs/var/cache/ldconfig/
+centos7/rootfs/var/cache/ldconfig/aux-cache
+centos7/rootfs/var/cache/yum/
+centos7/rootfs/var/cache/yum/x86_64/
+centos7/rootfs/var/cache/yum/x86_64/7/
+centos7/rootfs/var/cache/yum/x86_64/7/timedhosts.txt
+centos7/rootfs/var/cache/yum/x86_64/7/timedhosts
+centos7/rootfs/var/cache/yum/x86_64/7/.gpgkeyschecked.yum
+centos7/rootfs/var/cache/yum/x86_64/7/extras/
+centos7/rootfs/var/cache/yum/x86_64/7/extras/mirrorlist.txt
+centos7/rootfs/var/cache/yum/x86_64/7/extras/gen/
+centos7/rootfs/var/cache/yum/x86_64/7/extras/gen/primary_db.sqlite
+centos7/rootfs/var/cache/yum/x86_64/7/extras/cachecookie
+centos7/rootfs/var/cache/yum/x86_64/7/extras/db1c88508275ffebdc6cd8686da08745d2552e5b219b2e6f4cbde7b8afd3b1a3-primary.sqlite.bz2
+centos7/rootfs/var/cache/yum/x86_64/7/extras/repomd.xml
+centos7/rootfs/var/cache/yum/x86_64/7/extras/packages/
+centos7/rootfs/var/cache/yum/x86_64/7/updates/
+centos7/rootfs/var/cache/yum/x86_64/7/updates/mirrorlist.txt
+centos7/rootfs/var/cache/yum/x86_64/7/updates/gen/
+centos7/rootfs/var/cache/yum/x86_64/7/updates/gen/primary_db.sqlite
+centos7/rootfs/var/cache/yum/x86_64/7/updates/cachecook
+.
+.
+.
+.
+.
+.
+centos7/rootfs/usr/bin/glib-compile-schemas
+centos7/rootfs/selinux/
+centos7/rootfs/selinux/enforce
+centos7/rootfs/run/
+centos7/rootfs/run/blkid/
+centos7/rootfs/.autorelabel
+centos7/rootfs/proc/
+centos7/rootfs/bin
+centos7/rootfs/mnt/
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc#
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc#
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc#
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc# ls -al centos7/
+total 16
+drwxrwx---    3 root     root          4096 Jan 30 11:47 .
+drwxr-xr-x    6 root     root          4096 Jan 30 13:21 ..
+-rw-r--r--    1 root     root           856 Jan 30 11:47 config
+drwxr-xr-x   18 root     root          4096 Jan 16 16:00 rootfs
+root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc#
+```
+
 
 # Networking 
 
