@@ -11,7 +11,9 @@ The image has a minimial  setup of
 
 Download/Checkout the LXC Image file onto the FMADIO Packet Capture host system.
 
-Extract the contents of the tarball into /opt/fmadio/lxc/ running as sudo or root, example below 
+Extract the contents of the tarball "fmadio_lxc_centos7.9.tar.gz"
+
+Into /opt/fmadio/lxc/ running as sudo or root, example below 
 
 
 ```
