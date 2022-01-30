@@ -389,7 +389,7 @@ reading from file -, link-type EN10MB (Ethernet)
 .
 ```
 
-The data will ebb and flow based on the traffic volume. The processing is always fully lossless and based on how fast the Container software can recevied/process the data. Tcpdump is pretty slow so the thoughput wont be too high. 
+The data will ebb and flow based on the traffic volume. The processing is always fully lossless with thoughput  based on how fast the Container software can recevied/process the data. Tcpdump is pretty slow so the thoughput wont be too high. 
 
 
 ## Process Filtered Live Capture 
@@ -404,14 +404,7 @@ fmadio@fmadio20v3-287:$ sudo stream_cat -v --follow --ring /opt/fmadio/queue/lxc
 stream_cat: follow mode
 outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
 BPF Filter [arp]
-stream_cat ioqueue: 4
 Using Filename [asdf_20220130_0957]
-calibrating...
-0 : 2095077860           2.0951 cycles/nsec offset:4.922 Mhz
-Cycles/Sec 2095077860.0000 Std:       0 cycle std(  0.00000000) Target:2.10 Ghz
-StartChunkID: 65470683
-StartChunk: 65470683 Offset: 0 Stride: 1
-StartChunk: 65470683
 Ring size   : 10489868 16777216
 Ring Version:      100      100
 RING: Put:954430
@@ -461,13 +454,13 @@ reading from file -, link-type EN10MB (Ethernet)
 .
 ```
 
-## Container Performance 
+# Container Performance 
 
 
-### Container Forwarding 64B packets
+## Container Forwarding 64B packets
 
 
-The following is 10Gbps 64B line rate packet capture file piped into the container 
+The following is 10Gbps 64B line rate packet capture file, post capture forwarded into the container 
 
 The forwarding speed is ~ 3.1Gbps @ 6.1Mpps 
 
@@ -518,7 +511,7 @@ RING: Get:2243c0a
 .
 ```
 
-### Container Forwarding Mixed packets
+## Container Forwarding Mixed packets
 
 
 Following is performance thoughput test using real world traffic, with mixed packet size going to 1500MTU 
@@ -546,7 +539,7 @@ RING: Get:3dbf060a
 .
 ```
 
-And the same /dev/null forwarding in the Container
+And the same /dev/null forwarding in the Container for benchmarking purposes.
 
 ```
 [fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0 --cpu 30 > /dev/null
