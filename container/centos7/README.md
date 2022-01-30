@@ -250,7 +250,7 @@ Packets can then be captured using the tool "fmadio2pcap" which is fully opensou
 ### Process Historical Capture
 
 
-#### Execute on FMADIO Host
+** Execute FMADIO Host **
 
 Start the FMADIO Packet Capture Tx Path. This has full flow control ensuring there are Zero Packet drops. On the host system find the capture file to send to the container and run
 
@@ -281,7 +281,7 @@ RING: Get:5638
 ```
 
 
-#### Execute in the  Container 
+** Execute Container **
 
 ```
 [fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | tcpdump  -r - -nn | head -n 100
