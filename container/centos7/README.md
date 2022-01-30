@@ -244,7 +244,9 @@ root@centos7:/opt/fmadio/platform#
 
 ```
 
-Packets can then be captured using the tool "fmadio3pcap" which is fully opensource, its used as a minimial code example on how to receive and process packets within a container. 	Source code is here [https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c](https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c)
+Packets can then be captured using the tool "fmadio2pcap" which is fully opensource, this utility is used as a minimial code example on how to receive and process packets within a container. 
+
+Full code is here [https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c](https://github.com/fmadio/platform/blob/main/fmadio2pcap/main.c)
 
 
 ## Process Historical Capture
@@ -252,11 +254,11 @@ Packets can then be captured using the tool "fmadio3pcap" which is fully opensou
 
 **Execute FMADIO Host**
 
-Start the FMADIO Packet Capture Tx Path. This has full flow control ensuring there are Zero Packet drops. On the host system find the capture file to send to the container and run
+First step is to start the FMADIO Packet Capture Tx Path. This has full flow control ensuring there are Zero Packet drops. On the host system find the capture file to send to the container and run
 
 
 ```
-sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring0
+sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring1
 ```
 
 Example output as follows
@@ -273,7 +275,7 @@ RING: Get:5638
 1M Offset:    1GB ChunkID:65423026 TS:01:02:05.528.618.296 | Pending   9391 MB 10.550Gbps 1.068Mpps CPUIdle:0.000 CPUFetch:0.174 CPUSend:0.000
 2M Offset:    2GB ChunkID:65428016 TS:01:53:07.401.746.274 | Pending   8144 MB 10.332Gbps 1.038Mpps CPUIdle:0.000 CPUFetch:0.150 CPUSend:0.000
 3M Offset:    3GB ChunkID:65433020 TS:02:23:40.771.210.710 | Pending   6892 MB 10.365Gbps 0.990Mpps CPUIdle:0.000 CPUFetch:0.155 CPUSend:0.000
-4M Offset:    4GB ChunkID:65437915 TS:03:00:17.830.519.599 | Pending   5669 MB 10.109Gbps 1.086Mpps CPUIdle:0.000 CPUFetch:0.288 CPUSend:0.000
+4M Offset:    4GB ChunkID:65437915 TS:03:00:17.830.519.599 | Pending   5669 MB 10.110Gbps 1.086Mpps CPUIdle:0.000 CPUFetch:0.288 CPUSend:0.000
 .
 .
 .
@@ -282,6 +284,15 @@ RING: Get:5638
 
 
 **Execute Container**
+
+On the container, run the command in the /opt/fmadio/platform/fmadio2pcap directory to start the Rx Path
+
+```
+sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | tcpdump  -r - -nn | head -n 100
+```
+
+Example output as below
+
 
 ```
 [fmadio@centos7 fmadio2pcap]$ cd /opt/fmadio/platform/fmadio2pcap 
@@ -335,7 +346,7 @@ reading from file -, link-type EN10MB (Ethernet)
 .
 .
 ```
-We use tcpdump for example purposes, the utlity fmadio2pcap outputs a stnadard PCAP with Nanosecond timestamps. Any application that uses this format will work 
+We use tcpdump for example purposes, the utlity fmadio2pcap outputs a standard PCAP with Nanosecond timestamps. Any application that uses this format will work 
 
 
 ## Process Live Capture 
