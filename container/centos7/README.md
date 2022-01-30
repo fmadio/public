@@ -37,15 +37,15 @@ By default FMADIO uses bridged networking, this allows the container to look lik
 ![LXC Network Topology](./images/network_topology.png)
 
 
-###Host System###
+### Host System
 
 In the above diagram the FMADIO Packet Capture system running on as Host (baremetal) uses the virtual ethernet bridge "man0" with a static IP of 192.168.1.2/24 This interface is the general management used for FMADIO GUI, SSH etc to operate the core FMADIO Packet Capture System. 
 
-## Container 0##
+## Container 0
 
 In additionm the above diagram has "CentOS LXC Container 0" which is a virtualized (Using LXC) CentOS image running on the FMAD Packet Capture Hardware. It also uses the virtual ethernet bridge "man0" for connectivity and has its ethernet interface configured for 192.168.1.10/24 
 
-## Container 1##
+## Container 1
 
 Siliarly a 2nd "CentOS LXC Container 1" image is also running on the FMADIO Packet Capture Hardware, also using the virtual ethernet bridge "man0" with a static IP of 192.168.1.11/24 
 
