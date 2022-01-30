@@ -395,7 +395,7 @@ The data will ebb and flow based on the traffic volume. The processing is always
 ## Process Filtered Live Capture 
 
 
-In addition to Live data capture, filtering of the data before it gets sent to the Container is possible using standard BPF filters. The following example output sends ARP requests to the container.
+In addition to Live data capture, filtering of the data before it gets sent to the Container is possible using standard BPF filters. The following example output uses the BPF filter "arp"  to filter and only send ARP requests to the container.
 
 **Execute FMADIO Host**
 
