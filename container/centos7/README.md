@@ -6,7 +6,7 @@ Reference CentOS 7 FMADIO LXC Continer for use on FMADIO Packet Capture Systems.
 ## Config
 
 
-The default static IP address is 192.168.1.10/24 GW:192.168.1.1 
+The default static IP address is 192.168.1.10/24 Gateway:192.168.1.1 
 
 
 LXC Config as follows
@@ -30,3 +30,12 @@ lxc.net.0.ipv4.gateway = 192.168.1.1
 # map passthru queue 
 lxc.mount.entry = /opt/fmadio/queue/lxc_ring0 opt/fmadio/queue/lxc_ring0 none bind,create=file 0 0  
 ```
+
+By default FMADIO uses bridged networking, this allows the container to look like a full linux system running off a different IP, even tho its running on the FMADIO hardware. Network topology is shown below
+
+
+[LXC Network Topology](images/network_toplogy.png)
+
+
+
+
