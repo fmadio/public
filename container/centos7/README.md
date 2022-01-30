@@ -309,38 +309,6 @@ reading from file -, link-type EN10MB (Ethernet)
 00:11:08.562529 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 4294944128, win 10578, options [nop,nop,TS val 3394241810 ecr 3075767777], length 0
 00:11:08.562535 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 2896:4344, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
 00:11:08.562547 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 4344:5792, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562559 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 5792:7240, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562572 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 7240:8688, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562584 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 8688:10136, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562596 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 10136:11584, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562609 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 11584:13032, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562621 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 13032:14480, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562633 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 14480:15928, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562646 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 15928:17376, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562652 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 4294948472, win 10594, options [nop,nop,TS val 3394241811 ecr 3075767777], length 0
-00:11:08.562658 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 17376:18824, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562670 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 18824:20272, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562674 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 4294958608, win 10594, options [nop,nop,TS val 3394241811 ecr 3075767777], length 0
-00:11:08.562683 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 20272:21720, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562695 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 21720:23168, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562707 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 23168:24616, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562719 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 24616:26064, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562732 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 26064:27512, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562744 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 27512:28960, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562756 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 28960:30408, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562768 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 30408:31856, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562781 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 31856:33304, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562793 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 33304:34752, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562799 IP 192.168.2.205.30464 > 192.168.2.65.46666: Flags [.], ack 5792, win 10594, options [nop,nop,TS val 3394241811 ecr 3075767777], length 0
-00:11:08.562806 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 34752:36200, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562818 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 36200:37648, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562830 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 37648:39096, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562843 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 39096:40544, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562855 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 40544:41992, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562867 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 41992:43440, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562879 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 43440:44888, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562892 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 44888:46336, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
-00:11:08.562904 IP 192.168.2.65.46666 > 192.168.2.205.30464: Flags [.], seq 46336:47784, ack 1, win 229, options [nop,nop,TS val 3075767777 ecr 3394241810], length 1448
 .
 .
 .
@@ -485,12 +453,6 @@ reading from file -, link-type EN10MB (Ethernet)
 10:03:11.860189 ARP, Reply 192.168.2.65 is-at 30:9c:23:df:f0:5f, length 50
 10:03:12.548218 ARP, Request who-has 192.168.2.223 tell 192.168.2.130, length 50
 10:03:12.548381 ARP, Reply 192.168.2.223 is-at 18:c0:4d:b4:0e:72, length 50
-10:03:16.337276 ARP, Request who-has 192.168.2.65 tell 192.168.2.205, length 50
-10:03:16.337313 ARP, Reply 192.168.2.65 is-at 30:9c:23:df:f0:5f, length 50
-10:03:21.492033 ARP, Request who-has 192.168.2.73 tell 192.168.2.130, length 50
-10:03:21.492146 ARP, Reply 192.168.2.73 is-at 00:25:90:fe:91:9c, length 50
-10:03:21.935424 ARP, Reply 192.168.2.185 is-at b4:2e:99:25:09:f9, length 50
-10:03:23.203941 ARP, Request who-has 192.168.2.205 tell 192.168.2.131, length 50
 .
 .
 .
@@ -498,5 +460,109 @@ reading from file -, link-type EN10MB (Ethernet)
 .
 .
 ```
+
+## Container Performance 
+
+
+### Container Forwarding 64B packets
+
+
+The following is 10Gbps 64B line rate packet capture file piped into the container 
+
+The forwarding speed is ~ 3.1Gbps @ 6.1Mpps 
+
+NOTE: The processing bottleneck is all per packet overhead, not data throughput limited
+
+
+```
+fmadio@fmadio20v3-287:/mnt/store0/git/platform_20220120_rc1/include$ sudo stream_cat -v test64_20220120_1906   --ring /opt/fmadio/queue/lxc_ring0 --cpu 29
+outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
+stream_cat CPU Affinity: 29
+Ring Version:      100      100
+RING: Put:2243c0a
+RING: Get:2243c0a
+0M Offset:    0GB ChunkID:64466562 TS:10:07:05.413.425.671 | Pending  76314 MB 0.771Gbps 1.505Mpps CPUIdle:0.000 CPUFetch:0.085 CPUSend:0.000
+6M Offset:    0GB ChunkID:64468447 TS:10:07:05.838.281.925 | Pending  75843 MB 3.162Gbps 6.174Mpps CPUIdle:0.000 CPUFetch:0.068 CPUSend:0.000
+12M Offset:    0GB ChunkID:64470333 TS:10:07:06.263.363.566 | Pending  75371 MB 3.163Gbps 6.176Mpps CPUIdle:0.000 CPUFetch:0.064 CPUSend:0.000
+18M Offset:    1GB ChunkID:64472219 TS:10:07:06.688.445.233 | Pending  74900 MB 3.164Gbps 6.178Mpps CPUIdle:0.000 CPUFetch:0.062 CPUSend:0.000
+24M Offset:    1GB ChunkID:64474105 TS:10:07:07.113.526.867 | Pending  74428 MB 3.164Gbps 6.178Mpps CPUIdle:0.000 CPUFetch:0.061 CPUSend:0.000
+30M Offset:    1GB ChunkID:64475993 TS:10:07:07.539.059.284 | Pending  73956 MB 3.166Gbps 6.182Mpps CPUIdle:0.000 CPUFetch:0.060 CPUSend:0.000
+37M Offset:    2GB ChunkID:64477881 TS:10:07:07.964.591.727 | Pending  73484 MB 3.167Gbps 6.184Mpps CPUIdle:0.000 CPUFetch:0.058 CPUSend:0.000
+43M Offset:    2GB ChunkID:64479769 TS:10:07:08.390.124.144 | Pending  73012 MB 3.166Gbps 6.182Mpps CPUIdle:0.000 CPUFetch:0.057 CPUSend:0.000
+49M Offset:    2GB ChunkID:64481657 TS:10:07:08.815.656.574 | Pending  72540 MB 3.166Gbps 6.182Mpps CPUIdle:0.000 CPUFetch:0.058 CPUSend:0.000
+55M Offset:    3GB ChunkID:64483545 TS:10:07:09.241.188.984 | Pending  72068 MB 3.167Gbps 6.183Mpps CPUIdle:0.000 CPUFetch:0.057 CPUSend:0.000
+61M Offset:    3GB ChunkID:64485433 TS:10:07:09.666.721.414 | Pending  71596 MB 3.166Gbps 6.183Mpps CPUIdle:0.000 CPUFetch:0.056 CPUSend:0.000
+68M Offset:    4GB ChunkID:64487321 TS:10:07:10.092.253.838 | Pending  71124 MB 3.167Gbps 6.183Mpps CPUIdle:0.000 CPUFetch:0.057 CPUSend:0.000
+74M Offset:    4GB ChunkID:64489209 TS:10:07:10.517.786.255 | Pending  70652 MB 3.166Gbps 6.182Mpps CPUIdle:0.000 CPUFetch:0.056 CPUSend:0.000
+80M Offset:    4GB ChunkID:64491093 TS:10:07:10.942.417.133 | Pending  70181 MB 3.160Gbps 6.171Mpps CPUIdle:0.000 CPUFetch:0.055 CPUSend:0.000
+86M Offset:    5GB ChunkID:64492971 TS:10:07:11.365.695.677 | Pending  69712 MB 3.150Gbps 6.150Mpps CPUIdle:0.000 CPUFetch:0.056 CPUSend:0.000
+.
+.
+.
+
+```
+
+And running on the Container, piping the data to /dev/null as a benchmark
+
+
+```
+[fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0 --cpu 30 > /dev/null
+fmadio2pcap
+FMAD Ring [/opt/fmadio/queue/lxc_ring0]
+setting cpu affinity
+Ring size   : 10489868 10489868 16777216
+Ring Version:      100      100
+RING: Put:2243c0a
+RING: Get:2243c0a
+.
+.
+```
+
+### Container Forwarding Mixed packets
+
+
+Following is performance thoughput test using real world traffic, with mixed packet size going to 1500MTU 
+
+Thoughput is ~ 17Gbps or so @ 1.8Mpps  
+
+
+On the Host
+
+```
+fmadio@fmadio20v3-287:/mnt/store0/git/platform_20220120_rc1/include$ sudo stream_cat -v fmadio20v3-287_20220130_0000  --ring /opt/fmadio/queue/lxc_ring0 --cpu 29
+outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
+stream_cat CPU Affinity: 29
+Ring size   : 10489868 16777216
+Ring Version:      100      100
+RING: Put:3dbf060a
+RING: Get:3dbf060a
+0M Offset:    0GB ChunkID:65417929 TS:00:00:14.506.442.653 | Pending  10665 MB 1.179Gbps 0.485Mpps CPUIdle:0.000 CPUFetch:0.110 CPUSend:0.000
+1M Offset:    1GB ChunkID:65426046 TS:01:28:59.437.696.294 | Pending   8636 MB 16.803Gbps 1.692Mpps CPUIdle:0.000 CPUFetch:0.251 CPUSend:0.000
+3M Offset:    4GB ChunkID:65434754 TS:02:48:14.220.858.936 | Pending   6459 MB 18.020Gbps 1.818Mpps CPUIdle:0.000 CPUFetch:0.216 CPUSend:0.000
+5M Offset:    6GB ChunkID:65443512 TS:03:04:20.921.455.321 | Pending   4270 MB 18.111Gbps 1.931Mpps CPUIdle:0.000 CPUFetch:0.200 CPUSend:0.000
+7M Offset:    8GB ChunkID:65451887 TS:05:03:51.200.697.429 | Pending   2176 MB 17.270Gbps 2.286Mpps CPUIdle:0.000 CPUFetch:0.184 CPUSend:0.000
+9M Offset:   10GB ChunkID:65460574 TS:05:26:24.511.380.279 | Pending      4 MB 17.960Gbps 1.941Mpps CPUIdle:0.000 CPUFetch:0.197 CPUSend:0.000
+.
+.
+```
+
+And the same /dev/null forwarding in the Container
+
+```
+[fmadio@centos7 fmadio2pcap]$ sudo ./fmadio2pcap -i /opt/fmadio/queue/lxc_ring0 --cpu 30 > /dev/null
+fmadio2pcap
+FMAD Ring [/opt/fmadio/queue/lxc_ring0]
+setting cpu affinity
+Ring size   : 10489868 10489868 16777216
+Ring Version:      100      100
+RING: Put:2243c0a
+RING: Get:2243c0a
+.
+.
+```
+
+
+
+
 
 
