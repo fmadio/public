@@ -95,7 +95,7 @@ root@fmadioMAG-290:/mnt/store0/lxc/lib/lxc#
 
 # Networking 
 
-By default FMADIO uses virtual ethernet bridged networking, this allows the container to be utilized as a full standalone linux system running off a different IP, even tho its running on the FMADIO hardware. Network topology is shown below
+By default FMADIO uses virtual ethernet bridged networking, this allows the container to be utilized as a full standalone linux system running off a different IP, even tho its running in paralel and simultaniously on the FMADIO Packet Capture hardware. Network topology is shown below
 
 
 ![LXC Network Topology](./images/network_topology.png)
