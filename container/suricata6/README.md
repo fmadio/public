@@ -19,11 +19,11 @@ In the above diagram the FMADIO Packet Capture system running on as Host (bareme
 
 ### Container 0
 
-In additionm the above diagram has "CentOS LXC Container 0" which is a virtualized (Using LXC) CentOS image running on the FMAD Packet Capture Hardware. It also uses the virtual ethernet bridge "man0" for connectivity and has its ethernet interface configured for 192.168.1.11/24 
+In additionm the above diagram has "Link LXC Container 0" which is a virtualized (Using LXC) Linux image running on the FMAD Packet Capture Hardware. It also uses the virtual ethernet bridge "man0" for connectivity and has its ethernet interface configured for 192.168.1.11/24 
 
 ### Container 1
 
-Siliarly a 2nd "CentOS LXC Container 1" image is also running on the FMADIO Packet Capture Hardware, also using the virtual ethernet bridge "man0" with a static IP of 192.168.1.12/24 
+Siliarly a 2nd "Linux LXC Container 1" image is also running on the FMADIO Packet Capture Hardware, also using the virtual ethernet bridge "man0" with a static IP of 192.168.1.12/24 
 
 ### Topology 
 
@@ -32,7 +32,7 @@ All these interfaces utilize the "man0" virtual ethernet bridge, meaning while t
 While this example usses "man0" with physical network interface "phy0" a 1G RJ45 socket. This can be applied to the 10G/40G physical network interfaces "phy10" and "phy11" for higher management interface bandwidth.
 
 
-## Config
+## Files 
 
 The FMADIO Host interface is configured using
 
