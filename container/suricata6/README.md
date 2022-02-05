@@ -100,6 +100,9 @@ To change the static IP address please update both files appropriately
 
 FMADIO Runs Suricata using the PCAP interface using STDIN as the transport mode. We chose this route as it is lossless and provides a full backpressure / flow control using linux pipes and is reasonably performant. Scaling the throughput is provided using multiple LXC containers and RSS load balancing what data gets sent to each LXC container.  
 
+![Suricata DataFlow ](/images/fmadio_lxc_suricata.png)
+
+The primary benefit of this approach is the Suricata processing is fully lossless as it uses the FMADIO massive storage capacity as a FIFO ring buffer. This enables Suricata to process data as fast or as slow leaving the hard realtime packet capture problems to the FMADIO system.
 
 ## Container
 
