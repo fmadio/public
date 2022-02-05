@@ -191,3 +191,5 @@ ubuntu@suricata6:/mnt/suricata$
 
 
 Thoughput testing TBD... working on it.
+
+Our goal is sustained thoughput is 40Gbps per 96CPU / 576GB RAM 1U system with a reasonable Suricata ruleset (e.g ET Pro)
