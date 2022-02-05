@@ -1,6 +1,6 @@
 # Suricata 6.0 Container
 
-Container using Ubuntu 20 base with a stock Suricata installation. This shows how to feed PCAP data from the FMADIO Capture system into an isntance of Suricata both histoically and in realtime
+Container using Ubuntu 20 base with a stock Suricata 6.0.4 installation. This shows how to feed PCAP data from the FMADIO Capture system into an isntance of Suricata both histoically and in realtime
 
 
 # Configuration
@@ -96,4 +96,95 @@ network:
 
 To change the static IP address please update both files appropriately 
 
+# Operation
 
+FMADIO Runs Suricata using the PCAP interface using STDIN as the transport mode. We chose this route as it is lossless and provides a full backpressure / flow control using linux pipes and is reasonably performant. Scaling the throughput is provided using multiple LXC containers and RSS load balancing what data gets sent to each LXC container.  
+
+
+## Container
+
+In the container start Suricata as follows using the fmadio2pcap utility  
+
+```
+$ sudo /opt/fmadio/platform/fmadio2pcap/fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | sudo suricata -r /dev/stdin
+```
+
+Example output as follows, typically we run it in /mnt/suricata directory or a more fully enumerated path. This is so each days worth of suricata logs can be easily accessed. 
+
+
+```
+ubuntu@suricata6:/mnt/suricata$ sudo /opt/fmadio/platform/fmadio2pcap/fmadio2pcap -i /opt/fmadio/queue/lxc_ring0  | sudo suricata -r /dev/stdin
+fmadio2pcap
+FMAD Ring [/opt/fmadio/queue/lxc_ring0]
+Ring size   : 10489868 10489868 16777216
+Ring Version:      100      100
+RING: Put:15fa3884 84
+RING: Get:15fa3884 84
+5/2/2022 -- 08:08:08 - <Notice> - This is Suricata version 6.0.4 RELEASE running in USER mode
+5/2/2022 -- 08:08:37 - <Notice> - all 49 packet processing threads, 4 management threads initialized, engine started.
+
+```
+
+
+## FMADIO Host 
+
+On the FMADIO Host can pipe an fmadio capture as follows 
+
+```
+sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring1
+```
+
+Example output as follows
+
+
+```
+fmadio@fmadio20v3-287:$ sudo stream_cat -v <full capture name to replay> --ring /opt/fmadio/queue/lxc_ring0
+outputting to FMAD Ring [/opt/fmadio/queue/lxc_ring0j
+Ring size   : 10489868 16777216
+Ring Version:      100      100
+RING: Put:5638
+RING: Get:5638
+0M Offset:    0GB ChunkID:65417929 TS:00:00:14.506.442.653 | Pending  10665 MB 1.007Gbps 0.414Mpps CPUIdle:0.000 CPUFetch:0.137 CPUSend:0.000
+1M Offset:    1GB ChunkID:65423026 TS:01:02:05.528.618.296 | Pending   9391 MB 10.550Gbps 1.068Mpps CPUIdle:0.000 CPUFetch:0.174 CPUSend:0.000
+2M Offset:    2GB ChunkID:65428016 TS:01:53:07.401.746.274 | Pending   8144 MB 10.332Gbps 1.038Mpps CPUIdle:0.000 CPUFetch:0.150 CPUSend:0.000
+3M Offset:    3GB ChunkID:65433020 TS:02:23:40.771.210.710 | Pending   6892 MB 10.365Gbps 0.990Mpps CPUIdle:0.000 CPUFetch:0.155 CPUSend:0.000
+4M Offset:    4GB ChunkID:65437915 TS:03:00:17.830.519.599 | Pending   5669 MB 10.110Gbps 1.086Mpps CPUIdle:0.000 CPUFetch:0.288 CPUSend:0.000
+.
+.
+.
+.
+```
+
+## Suircata Config 
+
+Suricata and Suricata-update config files are locateds in the default directory 
+
+```
+/etc/suricata
+/var/lib/suricata/rules/
+```
+
+These can be tuned and modified based on requirements, by default logs are written in the directory suricata is run on. 
+
+Example logfile output
+
+```
+ubuntu@suricata6:/mnt/suricata$ ls -alh
+total 44M
+drwxr-xr-x 2 ubuntu root 4.0K Feb  5 08:22 .
+drwxr-xr-x 3 root   root 4.0K Feb  5 07:31 ..
+-rw-r--r-- 1 root   root  44M Feb  5 08:25 eve.json
+-rw-r--r-- 1 root   root 4.2K Feb  5 08:24 fast.log
+-rw-r--r-- 1 root   root  36K Feb  5 08:24 http.log
+-rw-r--r-- 1 root   root 104K Feb  5 08:25 stats.log
+-rw-r--r-- 1 root   root 7.6K Feb  5 08:25 suricata.log
+-rw-r--r-- 1 root   root  73K Feb  5 08:24 tls.log
+ubuntu@suricata6:/mnt/suricata$
+```
+
+
+
+# Performance 
+
+
+Thoughput testing TBD... working on it.
