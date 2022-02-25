@@ -79,7 +79,6 @@ LXC containers are located in the directory
 
 ```
 /opt/fmadio/lxc/
-
 ```
 extract the tarball into the above directory
 
