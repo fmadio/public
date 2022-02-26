@@ -49,29 +49,18 @@ Reboot the system. This will create any LXC specific directories on reboot
 
 ### STEP 4
 
-Checkout this Repo with LFS data 
+Download a container. For example the CentOS7 reference container, located here
+
 
 ```
-cd /mnt/store0/
-git clone https://github.com/fmadio/public.git
+https://github.com/fmadio/public/blob/master/container/centos7/fmadio_lxc_centos7.9.tar.gz
 ```
 
-Example as follows.
+Copy the tarball to 
 
 ```
-fmadio@fmadio100v2-228U:/mnt/store0/tmp2$ git clone https://github.com/fmadio/public.git
-Cloning into 'public'...
-remote: Enumerating objects: 243, done.
-remote: Counting objects: 100% (228/228), done.
-remote: Compressing objects: 100% (153/153), done.
-remote: Total 243 (delta 83), reused 183 (delta 38), pack-reused 15
-Receiving objects: 100% (243/243), 264.16 KiB | 11.49 MiB/s, done.
-Resolving deltas: 100% (86/86), done.
-Filtering content: 100% (2/2), 609.50 MiB | 10.85 MiB/s, done.
-
-fmadio@fmadio100v2-228U:/mnt/store0/tmp2$ 
+/opt/fmadio/lxc/
 ```
-
 
 ### STEP 3
 
@@ -87,7 +76,7 @@ Example:
 ```
 fmadio@fmadio100v2-228U:$ cd /opt/fmadio/lxc
 
-fmadio@fmadio100v2-228U:/mnt/store0/lxc/lib/lxc$ sudo tar xfzv /mnt/store0/tmp2/public/container/centos7/fmadio_lxc_centos7.9.tar.gz | head
+fmadio@fmadio100v2-228U:/mnt/store0/lxc/lib/lxc$ sudo tar xfzv fmadio_lxc_centos7.9.tar.gz | head
 centos7/
 centos7/config
 centos7/rootfs/
