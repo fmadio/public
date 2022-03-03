@@ -33,9 +33,9 @@
   - name: display capture enable status
     when: (capstatus.stdout | from_json).CaptureEnable == 'true'
     debug:
-      msg: 'Capture is Enable!!'
+      msg: 'Capture is Enable'
 
   - name: display capture disable status
     when: (capstatus.stdout | from_json).CaptureEnable == 'false'
     debug:
-      msg: 'Capture is Disable!!'
+      msg: 'Capture is Disable'
