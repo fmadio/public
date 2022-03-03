@@ -1,0 +1,41 @@
+---
+- hosts: fmadio20p2 fmadio20p3 fmadio20v3 fmadio40v3 fmadio100v2
+  
+  tasks:
+
+  - name: Get timestamp from the system - ymd_hm
+    shell: "date +%Y%m%d_%H%M"
+    register: tstamp1
+
+  - name: Set variables
+    set_fact:
+      log_filename: "capstatus_{{ tstamp1.stdout }}.log"
+      log_path: "log/"
+      r_log_path: "$HOME"
+
+  - name: Get IP
+    shell: "ifconfig man0 |grep 'inet addr'|sed 's/Bcast.*$//'|sed 's/inet addr://g'|tr -d '[:blank:]'"
+    register: ip
+  
+  - local_action: copy content={{ ip.stdout }} dest={{ log_path }}{{ log_filename }}
+
+  - name: capture status
+    shell: 'curl -s "http://127.0.0.1/sysmaster/capture_status"'
+    register: capstatus
+ 
+  - name: log capture status output to file
+    local_action:
+      module: lineinfile
+      line: '{{capstatus}}'
+      insertafter: EOF
+      dest: '{{ log_path }}{{ log_filename }}'  
+
+  - name: display capture enable status
+    when: (capstatus.stdout | from_json).CaptureEnable == 'true'
+    debug:
+      msg: 'Capture is Enable!!'
+
+  - name: display capture disable status
+    when: (capstatus.stdout | from_json).CaptureEnable == 'false'
+    debug:
+      msg: 'Capture is Disable!!'

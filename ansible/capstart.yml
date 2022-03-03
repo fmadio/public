@@ -1,0 +1,42 @@
+---
+- hosts: fmadio20p2 fmadio20p3 fmadio20v3 fmadio40v3 fmadio100v2
+  
+  tasks:
+
+  - name: Get timestamp from the system - ymd_hm
+    shell: "date +%Y%m%d_%H%M"
+    register: tstamp1
+
+  - name: Set variables
+    set_fact:
+      capturename: 'ansible'
+      log_filename: "capstart_{{ tstamp1.stdout }}.log"
+      log_path: "log/"
+      r_log_path: "$HOME/"
+
+  - name: Get IP
+    shell: "ifconfig man0 |grep 'inet addr'|sed 's/Bcast.*$//'|sed 's/inet addr://g'|tr -d '[:blank:]'"
+    register: ip
+  
+  - local_action: copy content={{ ip.stdout }} dest={{ log_path }}{{ log_filename }}
+
+  - name: capture start
+    shell: 'curl -s "http://127.0.0.1/sysmaster/capture_start?StreamName={{capturename}}"'
+    register: capstart
+
+  - name: log capture start output to file
+    local_action:
+      module: lineinfile
+      line: '{{capstart}}'
+      insertafter: EOF
+      dest: '{{ log_path }}{{ log_filename }}'  
+
+  - name: check capture start
+    when: capstart is search ('successfully started capture')
+    debug:
+      msg: 'Capture Start Successfully'
+
+  - name: check capture is not start
+    when: capstart is not search ('successfully started capture')
+    debug:
+      msg: 'Capture is not started or already running'
