@@ -1,0 +1,308 @@
+{
+  "mappings": {
+    "dynamic": false,
+    "date_detection": false,
+    "properties": {
+      "timestamp": {
+        "type": "date",
+        "format": "epoch_millis"
+      },
+      "device": {
+        "type": "constant_keyword"
+      },
+      "hash": {
+        "type": "keyword",
+        "norms": false
+      },
+      "macAddr": {
+        "type": "keyword",
+        "norms": false
+      },
+      "macSrc": {
+        "type": "keyword",
+        "copy_to": "macAddr",
+        "norms": false
+      },
+      "macDst": {
+        "type": "keyword",
+        "copy_to": "macAddr",
+        "norms": false
+      },
+      "macProto": {
+        "type": "keyword",
+        "norms": false
+      },
+      "vlan0": {
+        "type": "keyword",
+        "null_value": "none",
+        "norms": false
+      },
+      "mpls0TC": {
+        "type": "keyword",
+        "null_value": "none",
+        "norms": false
+      },
+      "ipv4Src": {
+        "type": "ip"
+      },
+      "hostSrc": {
+        "type": "keyword",
+        "norms": false
+      },
+      "ipv4Dst": {
+        "type": "ip"
+      },
+      "hostDst": {
+        "type": "keyword",
+        "norms": false
+      },
+      "ipv4Proto": {
+        "type": "keyword",
+        "norms": false
+      },
+      "ipv4DSCP": {
+        "type": "keyword",
+        "norms": false
+      },
+      "ipv4Frag": {
+        "type": "integer",
+        "index": false
+      },
+      "portSrc": {
+        "type": "keyword",
+        "norms": false
+      },
+      "portDst": {
+        "type": "keyword",
+        "norms": false
+      },
+      "application": {
+        "type": "keyword",
+        "null_value": "undefined",
+        "norms": false
+      },
+      "tag0": {
+        "type": "keyword",
+        "null_value": "unknown",
+        "norms": false
+      },
+      "tag1": {
+        "type": "keyword",
+        "null_value": "unknown",
+        "norms": false
+      },
+      "tag2": {
+        "type": "keyword",
+        "null_value": "unknown",
+        "norms": false
+      },
+      "tcpFin": {
+        "type": "integer",
+        "index": false
+      },
+      "tcpSyn": {
+        "type": "integer",
+        "index": false
+      },
+      "tcpSynAck": {
+        "type": "integer",
+        "index": false
+      },
+      "tcpSackPerm": {
+        "type": "integer",
+        "index": false
+      },
+      "tcpRst": {
+        "type": "integer",
+        "index": false
+      },
+      "tcpSack": {
+        "type": "integer",
+        "index": false
+      },
+      "tcpZeroWindow": {
+        "type": "integer",
+        "index": false
+      },
+      "totalPackets": {
+        "type": "long",
+        "index": false
+      },
+      "totalBytes": {
+        "type": "long",
+        "index": false
+      },
+      "totalBits": {
+        "type": "long",
+        "index": false
+      },
+      "totalFCS": {
+        "type": "long",
+        "index": false
+      },
+
+	  "geoipSrcLocation": {
+		"type": "geo_point"
+	  },
+	  "geoipSrcCountry_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipSrcCountry_iso_code": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipSrcCity_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipSrcAsn": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipSrcOrg": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipSrcIsp": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipDstLocation": {
+		"type": "geo_point"
+	  },
+	  "geoipDstCountry_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipDstCountry_iso_code": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipDstCity_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipDstAsn": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipDstOrg": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "geoipDstIsp": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  }
+	  ,
+      "decapType": {
+        "type": "keyword",
+        "norms": false
+      },
+      "decapIPv4Src": {
+        "type": "ip"
+      },
+      "decapIPv4Dst": {
+        "type": "ip"
+      },
+      "decapIpv4Proto": {
+        "type": "keyword",
+        "norms": false
+      },
+      "decapIpv4DSCP": {
+        "type": "keyword",
+        "norms": false
+      },
+      "decapPortSrc": {
+        "type": "keyword",
+        "norms": false
+      },
+      "decapPortDst": {
+        "type": "keyword",
+        "norms": false
+      },
+
+	  "decapGeoipSrcLocation": {
+		"type": "geo_point"
+	  },
+	  "decapGeoipSrcCountry_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipSrcCountry_iso_code": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipSrcCity_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipSrcAsn": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipSrcOrg": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipSrcIsp": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipDstLocation": {
+		"type": "geo_point"
+	  },
+	  "decapGeoipDstCountry_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipDstCountry_iso_code": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipDstCity_name": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipDstAsn": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipDstOrg": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  },
+	  "decapGeoipDstIsp": {
+		"type": "keyword",
+		"null_value": "unknown",
+		"norms": false
+	  }
+
+	}
+  }
+}
+
