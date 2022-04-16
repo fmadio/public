@@ -8,9 +8,13 @@
         "format": "epoch_millis"
       },
       "device": {
-        "type": "constant_keyword"
+        "type": "keyword"
       },
-      "hash": {
+      "hashHalf": {
+        "type": "keyword",
+        "norms": false
+      },
+      "hashFull": {
         "type": "keyword",
         "norms": false
       },
