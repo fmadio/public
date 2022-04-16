@@ -36,7 +36,9 @@ default container only uses 1 CPU
  sudo lxc-start -n elastic
 ```
 
- check elastic health
+wait a minute for ES/Kibana/Grafana to spin up
+
+check elastic health
 
 ```
 fmadio@fmadio40v3SM-455:~$ curl http://192.168.1.100:9200/
@@ -60,4 +62,20 @@ fmadio@fmadio40v3SM-455:~$ curl http://192.168.1.100:9200/
 fmadio@fmadio40v3SM-455:~$ 
 ```
 
+If theres some problem, please check amount of disk space is ok
 
+
+## PCAP2JSON
+
+Default index name "pcap2json_index"
+
+## Changelog 
+
+
+elastic-20220414.tar.gz
+
+- added private interface 192.168.2.255.0/24 to conatiner
+- installed world map grafana plugin 
+- installed generic JSON source grafana plugin 
+- default pcap2json_index with mapping 
+- default Grafana FMADIO pcap2json dashboard 
