@@ -69,6 +69,11 @@ If theres some problem, please check amount of disk space is ok
 
 Default index name "pcap2json_index"
 
+## Grafana 
+
+Default login admin:fmad-secret 
+
+
 ## Changelog 
 
 
