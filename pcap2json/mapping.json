@@ -145,8 +145,7 @@
         "index": false
       },
       "RTT": {
-        "type": "float",
-        "index": false
+        "type": "float"
       },
 	  "geoipSrcLocation": {
 		"type": "geo_point"
