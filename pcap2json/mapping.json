@@ -147,7 +147,11 @@
       "iRTT": {
         "type": "float"
       },
+      "sRTT": {
+        "type": "float"
+      },
 	  "geoipSrcLocation": {
+
 		"type": "geo_point"
 	  },
 	  "geoipSrcCountry_name": {
