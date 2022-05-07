@@ -9,3 +9,7 @@
 # disable disk treshold 
 /usr/local/bin/curl -H 'Content-Type: application/json' -X PUT http://192.168.255.110:9200/_cluster/settings  -d '{"transient": {"cluster.routing.allocation.disk.threshold_enabled": false}}' | jq
 
+# clear any read only settings
+/usr/local/bin/curl -H 'Content-Type: application/json' -X PUT  http://192.168.255.110:9200/_all/_settings  -d '{"index.blocks.read_only_allow_delete": null}' | jq
+
+
