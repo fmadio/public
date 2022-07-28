@@ -22,6 +22,16 @@ FMADIOFlushTime = 10e9
 -- filename prefix. e.g. hostname
 FilePrefix = "fmadio100"
 
+-- Filter BPF
+FilterBPF = nil
+--FilterBPF = "(not port 2049) and (not port 80)"			-- excude nfs traffic and http traffic
+
+-- Filter Frame 
+FilterFrame = nil
+
+-- enable gzip compression
+--IsGZIP = true
+
 -- get args
 local i = 1
 while (i < #arg) do
@@ -130,11 +140,32 @@ if (RealtimeUpdate ~= nil) then
 		-- write as epoch seconds 
 		--local FileName = FilePrefix .. "_"..string.format("%i", TS0/1e9)..".pcap"
 
+		-- gzip enabled
+		if (IsGZIP) then FileName = FileName .. ".gz" end
+
 		-- log 
 		print(string.format("Slice %i - %i : %s", TS0, TS1, FileName))
 
+		-- curl command 
+		local CmdCURL = CURL .. ' -s -k "'..FMADIOAddress..string.format('/api/v1/pcap/timerange?TSBegin=%i&TSEnd=%i', TS0, TS1)..'" -G '
+
+		-- if BPF filter
+		if (FilterBPF ~= nil) then
+			CmdCURL = CmdCURL .. ' --data-urlencode "&FilterBPF='..FilterBPF..'" ' 
+		end
+
+		-- if Frame filter
+		if (FilterFrame ~= nil) then
+			CmdCURL = CmdCURL .. ' --data-urlencode "&FilterFrame='..FilterFrame..'" ' 
+		end
+
+		-- compression
+		if (IsGZIP) then
+			CmdCURL = CmdCURL .. " | gzip -c "
+		end
+
 		-- fetch pcap 
-		local Cmd = CURL .. ' -s -k "'..FMADIOAddress..string.format('/api/v1/pcap/timerange?TSBegin=%i&TSEnd=%i', TS0, TS1)..'" > '.. TargetPath..'/'..FileName
+		local Cmd = CmdCURL .. ' > '.. TargetPath..'/'..FileName
 		print(Cmd)
 		os.execute(Cmd)
 
