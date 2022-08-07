@@ -5,21 +5,27 @@
 -- assumed to run on the fmadio capture device
 --
 
+
+function trace(Message, ...)
+	os.trace(os.date("[%Y%m%d_%H%M%S] ").. string.format(Message, unpack({...})))
+end
+
+trace("Start Validation\n");
+
 local Cmd = ""
 
 -- cat the currently active capture
-Cmd = " sudo stream_cat --chunked "
+Cmd = " sudo /opt/fmadio/bin/stream_cat --chunked "
 
-
-Cmd = Cmd .. " colo0_20220728_0300 " 
+--Cmd = Cmd .. " colo0_20220728_0300 " 
 
 -- run capinfos 
-Cmd = Cmd .. " | capinfos2 -v "
+Cmd = Cmd .. " | /opt/fmadio/bin/capinfos2 -v "
 
 local TimeStart = 0
 local TimeStop  = 0
 
-print(Cmd)
+trace("Cmd [%s]\n", Cmd)
 local f = io.popen(Cmd, "r")
 for l in f:lines() do
 
