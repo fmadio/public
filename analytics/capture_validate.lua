@@ -10,6 +10,7 @@ function trace(Message, ...)
 	os.trace(os.date("[%Y%m%d_%H%M%S] ").. string.format(Message, unpack({...})))
 end
 
+
 trace("Start Validation\n");
 
 local Cmd = ""
@@ -17,7 +18,14 @@ local Cmd = ""
 -- cat the currently active capture
 Cmd = " sudo /opt/fmadio/bin/stream_cat --chunked "
 
---Cmd = Cmd .. " colo0_20220728_0300 " 
+
+-- run it on a specific capture
+if (#ARGV  > 0) then
+	for a,b in pairs(ARGV) do
+		trace("Offline mode %s\n", b)
+		Cmd = Cmd .. " "..b.."" 
+	end
+end
 
 -- run capinfos 
 Cmd = Cmd .. " | /opt/fmadio/bin/capinfos2 -v "
