@@ -10,6 +10,10 @@
       "device": {
         "type": "keyword"
       },
+      "flowCount": {
+        "type": "integer",
+        "index": false
+      },
       "hashHalf": {
         "type": "keyword",
         "norms": false
