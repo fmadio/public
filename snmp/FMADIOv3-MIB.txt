@@ -283,6 +283,51 @@ fmadioCaptureEnable OBJECT-TYPE
 
 ::= { fmadioCapture 18 }
 
+--
+--  CPU temperature
+--
+
+fmadioCPUTemperature  OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION "CPU Temperature"
+
+::= { fmadioCapture 30 }
+
+
+--
+-- FAN Alert  
+--
+
+fmadioFANAlert  OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION "FAN Alert"
+
+::= { fmadioCapture 31 }
+
+--
+--  PSU Status
+--
+
+fmadioPSU0  OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION "PSU 0 Status"
+
+::= { fmadioCapture 32 }
+
+fmadioPSU1  OBJECT-TYPE
+    SYNTAX      Integer32
+    MAX-ACCESS  accessible-for-notify
+    STATUS      current
+    DESCRIPTION "PSU 1 Status"
+
+::= { fmadioCapture 33 }
+
 
 --
 -- misc
