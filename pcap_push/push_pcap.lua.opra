@@ -1,0 +1,169 @@
+-- OPRA multciast 1min push per multicast group
+--
+-- config file which uses code to generate the
+-- push target. this creates 1min pcaps for each UDP multicast group
+-- writes them to the NFS mount point
+--
+
+local Config = {}
+
+Config.Target = {}
+
+local OPRAPorts =
+{
+--[[
+-- A Feed
+11101,
+11102,
+11103,
+11104,
+11105,
+11106,
+11107,
+11108,
+11109,
+11110,
+11111,
+11112,
+11113,
+11114,
+11115,
+11116,
+11117,
+11118,
+11119,
+11120,
+11121,
+11122,
+11123,
+11124,
+
+-- B Feed
+12101,
+12102,
+12103,
+12104,
+12105,
+12106,
+12107,
+12108,
+12109,
+12110,
+12111,
+12112,
+12113,
+12114,
+12115,
+12116,
+12117,
+12118,
+12119,
+12120,
+12121,
+12122,
+12123,
+12124,
+]]
+
+-- A feed
+16101,
+16102,
+16103,
+16104,
+16105,
+16106,
+16107,
+16108,
+16109,
+16110,
+16111,
+16112,
+16113,
+16114,
+16115,
+16116,
+16117,
+16118,
+16119,
+16120,
+16121,
+16122,
+16123,
+16124,
+
+-- B feed
+17101,
+17102,
+17103,
+17104,
+17105,
+17106,
+17107,
+17108,
+17109,
+17110,
+17111,
+17112,
+17113,
+17114,
+17115,
+17116,
+17117,
+17118,
+17119,
+17120,
+17121,
+17122,
+17123,
+17124,
+}
+
+
+local CPUNo = 0
+for i,PortNo in ipairs(OPRAPorts) do
+
+	table.insert(Config.Target,
+	{
+		-- name of the file
+		Desc      = "group-"..PortNo,
+		Mode      = "File",
+
+		-- location prefix
+		Path      = "/mnt/remote0/OPRA/Multicast",
+
+		-- split every 1minute
+		Split     = "--split-time "..(60e9*1),
+
+		-- set the owner of the output file
+		SplitCmd  = "-Z fmadio",
+
+		-- use HHMMSS filename
+		FileName  = "--filename-tstr-HHMMSS",
+
+		-- generate BPF filter
+		FilterBPF = "udp and port "..PortNo,
+
+		-- compression options
+		PipeCmd   = "zstd -c",
+		FileSuffix   = ".pcap.zstd",
+
+		--PipeCmd   = "gzip -c",
+		--FileSuffix   = ".pcap.gzip",
+
+		--PipeCmd   = "lz4 -c",
+		--FileSuffix   = ".pcap.lz4",
+
+		--PipeCmd   = "xz -c -T8",
+		--FileSuffix   = ".pcap.xz",
+
+		-- run 4:1 ratio. 4 multicast groups on 1 CPU
+		--CPU		  = 49 + math.floor(CPUNo/4),
+
+		-- run 1:1 ratio. 1 multicast groups on 1 CPU
+		CPU		  = 49 + math.floor(CPUNo/1),
+	})
+
+	CPUNo = CPUNo + 1
+end
+
+return Config
