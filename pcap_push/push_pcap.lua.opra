@@ -125,7 +125,7 @@ for i,PortNo in ipairs(OPRAPorts) do
 	table.insert(Config.Target,
 	{
 		-- name of the file
-		Desc      = "group-"..PortNo,
+		Desc      = "Port-"..PortNo,
 		Mode      = "File",
 
 		-- location prefix
