@@ -129,7 +129,7 @@ for i,PortNo in ipairs(OPRAPorts) do
 		Mode      = "File",
 
 		-- location prefix
-		Path      = "/mnt/remote0/OPRA/Multicast",
+		Path      = os.date("/mnt/remote0/%Y%m%d/opra."..PortNo.."."),
 
 		-- split every 1minute
 		Split     = "--split-time "..(60e9*1),
@@ -139,6 +139,7 @@ for i,PortNo in ipairs(OPRAPorts) do
 
 		-- use HHMMSS filename
 		FileName  = "--filename-tstr-HHMMSS",
+		--FileName  = "--filename-epoch-sec",
 
 		-- generate BPF filter
 		FilterBPF = "udp and port "..PortNo,
