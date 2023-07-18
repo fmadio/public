@@ -5,7 +5,7 @@ FMADIOv3-MIB DEFINITIONS ::= BEGIN
 --
 
 IMPORTS
-    MODULE-IDENTITY, OBJECT-TYPE, Integer32, enterprises, 
+    MODULE-IDENTITY, OBJECT-TYPE, Integer32, Counter64, Integer64, enterprises, 
     NOTIFICATION-TYPE                       FROM SNMPv2-SMI
     SnmpAdminString                         FROM SNMP-FRAMEWORK-MIB
     netSnmp                                 FROM NET-SNMP-MIB
@@ -132,8 +132,8 @@ fmadioCapture7Link OBJECT-TYPE
 -- capture port data
 --
 
-fmadioCapturePacket OBJECT-TYPE
-    SYNTAX     	Coutner64 
+fmadioTotalCapturePacket OBJECT-TYPE
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Packets Captured"
@@ -141,8 +141,8 @@ fmadioCapturePacket OBJECT-TYPE
 ::= { fmadioCapture 10 }
 
 
-fmadioCaptureByte OBJECT-TYPE
-    SYNTAX     	Coutner64 
+fmadioTotalCaptureByte OBJECT-TYPE
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Bytes Captured"
@@ -151,7 +151,7 @@ fmadioCaptureByte OBJECT-TYPE
 
 
 fmadioCaptureCache OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Bytes Cached waiting for writeback to magnetic storage"
@@ -160,7 +160,7 @@ fmadioCaptureCache OBJECT-TYPE
 
 
 fmadioCaptureDrop OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Number of packet drops"
@@ -169,7 +169,7 @@ fmadioCaptureDrop OBJECT-TYPE
 
 
 fmadioCaptureError OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Number of packet errors (e.g. FCS)"
@@ -178,7 +178,7 @@ fmadioCaptureError OBJECT-TYPE
 
 
 fmadioCaptureOverflow OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Bytes Overflowed"
@@ -191,7 +191,7 @@ fmadioCaptureOverflow OBJECT-TYPE
 --
 
 fmadioDiskFreeSystem OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Bytes Free on system Disk"
@@ -199,7 +199,7 @@ fmadioDiskFreeSystem OBJECT-TYPE
 ::= { fmadioCapture 20 }
 
 fmadioDiskFreeStore0 OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Bytes Free on store0 Disk"
@@ -207,7 +207,7 @@ fmadioDiskFreeStore0 OBJECT-TYPE
 ::= { fmadioCapture 21 }
 
 fmadioDiskFreeStore1 OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Bytes Free on store1 Disk"
@@ -215,7 +215,7 @@ fmadioDiskFreeStore1 OBJECT-TYPE
 ::= { fmadioCapture 22 }
 
 fmadioDiskFreeRemote0 OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Bytes Free on remote0 Disk"
@@ -223,7 +223,7 @@ fmadioDiskFreeRemote0 OBJECT-TYPE
 ::= { fmadioCapture 23 }
 
 fmadioDiskFreeRemote1 OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Bytes Free on remote1 Disk"
@@ -231,7 +231,7 @@ fmadioDiskFreeRemote1 OBJECT-TYPE
 ::= { fmadioCapture 24 }
 
 fmadioDiskError OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Disk Errors"
@@ -348,3 +348,4 @@ fmadioNotificationLinkStatus OBJECT-TYPE
 ::= { fmadioNotifications 2 }
 
 END
+
