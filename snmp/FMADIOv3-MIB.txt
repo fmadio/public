@@ -5,8 +5,7 @@ FMADIOv3-MIB DEFINITIONS ::= BEGIN
 --
 
 IMPORTS
-    MODULE-IDENTITY, OBJECT-TYPE, Integer32, Counter64, Integer64, enterprises, 
-    NOTIFICATION-TYPE                       FROM SNMPv2-SMI
+    MODULE-IDENTITY, OBJECT-TYPE, Integer32, enterprises FROM SNMPv2-SMI
     SnmpAdminString                         FROM SNMP-FRAMEWORK-MIB
     netSnmp                                 FROM NET-SNMP-MIB
     InetAddressType, InetAddress            FROM INET-ADDRESS-MIB
@@ -132,7 +131,7 @@ fmadioCapture7Link OBJECT-TYPE
 -- capture port data
 --
 
-fmadioTotalCapturePacket OBJECT-TYPE
+fmadioCapturePacket OBJECT-TYPE
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
@@ -141,8 +140,8 @@ fmadioTotalCapturePacket OBJECT-TYPE
 ::= { fmadioCapture 10 }
 
 
-fmadioTotalCaptureByte OBJECT-TYPE
-    SYNTAX     	Counter64 
+fmadioCaptureByte OBJECT-TYPE
+    SYNTAX     	Counter64
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Bytes Captured"
@@ -178,7 +177,7 @@ fmadioCaptureError OBJECT-TYPE
 
 
 fmadioCaptureOverflow OBJECT-TYPE
-    SYNTAX     	Counter64 
+    SYNTAX      Counter64	
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total Bytes Overflowed"
@@ -239,7 +238,7 @@ fmadioDiskError OBJECT-TYPE
 ::= { fmadioCapture 25 }
 
 fmadioDiskSMART OBJECT-TYPE
-    SYNTAX     	Coutner64 
+    SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Total SMART Errors"
@@ -253,7 +252,7 @@ fmadioDiskSMART OBJECT-TYPE
 --
 
 fmadioCaptureBps OBJECT-TYPE
-    SYNTAX     	Integer64	
+    SYNTAX     	Counter64
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Current Capture Bits per Second"
@@ -262,7 +261,7 @@ fmadioCaptureBps OBJECT-TYPE
 
 
 fmadioCapturePps OBJECT-TYPE
-    SYNTAX     	Integer64	
+    SYNTAX     	Counter64	
     MAX-ACCESS  accessible-for-notify
     STATUS      current
     DESCRIPTION "Current Capture Packets per Second"
@@ -348,4 +347,3 @@ fmadioNotificationLinkStatus OBJECT-TYPE
 ::= { fmadioNotifications 2 }
 
 END
-
