@@ -5,7 +5,7 @@ FMADIOv3-MIB DEFINITIONS ::= BEGIN
 --
 
 IMPORTS
-    MODULE-IDENTITY, OBJECT-TYPE, Integer32, enterprises FROM SNMPv2-SMI
+    MODULE-IDENTITY, NOTIFICATION-TYPE, OBJECT-TYPE, Integer32, enterprises FROM SNMPv2-SMI
     SnmpAdminString                         FROM SNMP-FRAMEWORK-MIB
     netSnmp                                 FROM NET-SNMP-MIB
     InetAddressType, InetAddress            FROM INET-ADDRESS-MIB
@@ -27,101 +27,73 @@ fmadioNotificationObjects          OBJECT IDENTIFIER ::= { fmadio 3 }
 
 fmadioCapture          		   OBJECT IDENTIFIER ::= { fmadio 4 }
 
---
--- status values 
---
-
-fmadioCaptureByte  OBJECT-TYPE
-    SYNTAX      Counter64 
-    MAX-ACCESS  read-write
-    STATUS      current
-    DESCRIPTION "total number of bytes captured"
-    DEFVAL { 0 }
-    ::= { fmadioScalars 1 }
-
-
-netSnmpExampleString OBJECT-TYPE
-    SYNTAX      SnmpAdminString
-    MAX-ACCESS  read-write
-    STATUS      current
-    DESCRIPTION
-	"This is a simple object which merely houses a writable
-	 string.  It's only purposes is to hold the value of a single
-	 string.  Writing to it will simply change the value for
-	 subsequent GET/GETNEXT/GETBULK retrievals.
-
-	 This example object is implemented in the
-	 agent/mibgroup/examples/watched.c file."
-    DEFVAL { "So long, and thanks for all the fish!" }
-    ::= { fmadioScalars 3 }
-
 
 
 --
 --  Capture Link Status 
 --
 
-fmadioCapture0Link OBJECT-TYPE
+fmadioCapture0Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 0 Up"
+    DESCRIPTION "FMADIO Capture Link 0 Up"
 
 ::= { fmadioCapture 1 }
 
-fmadioCapture1Link OBJECT-TYPE
+fmadioCapture1Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 1 Up"
+    DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 2 }
 
-fmadioCapture2Link OBJECT-TYPE
+fmadioCapture2Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 1 Up"
+    DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 3 }
 
-fmadioCapture3Link OBJECT-TYPE
+fmadioCapture3Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 1 Up"
+    DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 4 }
 
-fmadioCapture4Link OBJECT-TYPE
+fmadioCapture4Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 1 Up"
+    DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 5 }
 
-fmadioCapture5Link OBJECT-TYPE
+fmadioCapture5Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 1 Up"
+    DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 6 }
 
-fmadioCapture6Link OBJECT-TYPE
+fmadioCapture6Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 1 Up"
+    DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 7 }
 
-fmadioCapture7Link OBJECT-TYPE
+fmadioCapture7Link NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Link 1 Up"
+    DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 8 }
 
@@ -131,56 +103,56 @@ fmadioCapture7Link OBJECT-TYPE
 -- capture port data
 --
 
-fmadioCapturePacket OBJECT-TYPE
+fmadioCapturePacket NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total Packets Captured"
+    DESCRIPTION "FMADIO Total Packets Captured"
 
 ::= { fmadioCapture 10 }
 
 
-fmadioCaptureByte OBJECT-TYPE
+fmadioCaptureByte NOTIFICATION-TYPE
     SYNTAX     	Counter64
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total Bytes Captured"
+    DESCRIPTION "FMADIO Total Bytes Captured"
 
 ::= { fmadioCapture 11 }
 
 
-fmadioCaptureCache OBJECT-TYPE
+fmadioCaptureCache NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total Bytes Cached waiting for writeback to magnetic storage"
+    DESCRIPTION "FMADIO Total Bytes Cached waiting for writeback to magnetic storage"
 
 ::= { fmadioCapture 12 }
 
 
-fmadioCaptureDrop OBJECT-TYPE
+fmadioCaptureDrop NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total Number of packet drops"
+    DESCRIPTION "FMADIO Total Number of packet drops"
 
 ::= { fmadioCapture 13 }
 
 
-fmadioCaptureError OBJECT-TYPE
+fmadioCaptureError NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total Number of packet errors (e.g. FCS)"
+    DESCRIPTION "FMADIO Total Number of packet errors (e.g. FCS)"
 
 ::= { fmadioCapture 14 }
 
 
-fmadioCaptureOverflow OBJECT-TYPE
+fmadioCaptureOverflow NOTIFICATION-TYPE 
     SYNTAX      Counter64	
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total Bytes Overflowed"
+    DESCRIPTION "FMADIO Total Bytes Cache Overflow/lost"
 
 ::= { fmadioCapture 15 }
 
@@ -189,69 +161,68 @@ fmadioCaptureOverflow OBJECT-TYPE
 -- disk status
 --
 
-fmadioDiskFreeSystem OBJECT-TYPE
+fmadioDiskFreeSystem NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Bytes Free on system Disk"
+    DESCRIPTION "FMADIO Disk Bytes Free on /mnt/system"
 
 ::= { fmadioCapture 20 }
 
-fmadioDiskFreeStore0 OBJECT-TYPE
+fmadioDiskFreeStore0 NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Bytes Free on store0 Disk"
+    DESCRIPTION "FMADIO Disk Bytes Free on /mnt/store0"
 
 ::= { fmadioCapture 21 }
 
-fmadioDiskFreeStore1 OBJECT-TYPE
+fmadioDiskFreeStore1 NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Bytes Free on store1 Disk"
+    DESCRIPTION "FMADIO Disk Bytes Free on /mnt/store1"
 
 ::= { fmadioCapture 22 }
 
-fmadioDiskFreeRemote0 OBJECT-TYPE
+fmadioDiskFreeRemote0 NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Bytes Free on remote0 Disk"
+    DESCRIPTION "FMADIO Disk Bytes Free on /mnt/remote0"
 
 ::= { fmadioCapture 23 }
 
-fmadioDiskFreeRemote1 OBJECT-TYPE
+fmadioDiskFreeRemote1 NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Bytes Free on remote1 Disk"
+    DESCRIPTION "FMADIO Disk Bytes Free on /mnt/remote1"
 
 ::= { fmadioCapture 24 }
 
-fmadioDiskError OBJECT-TYPE
+fmadioDiskError NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total Disk Errors"
+    DESCRIPTION "FMADIO Disk Total Errors"
 
 ::= { fmadioCapture 25 }
 
-fmadioDiskSMART OBJECT-TYPE
+fmadioDiskSMART NOTIFICATION-TYPE 
     SYNTAX     	Counter64 
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Total SMART Errors"
+    DESCRIPTION "FMADIO Disk Total SMART Errors"
 
 ::= { fmadioCapture 26 }
-
 
 
 --
 -- current data rate
 --
 
-fmadioCaptureBps OBJECT-TYPE
+fmadioCaptureBps NOTIFICATION-TYPE 
     SYNTAX     	Counter64
     MAX-ACCESS  accessible-for-notify
     STATUS      current
@@ -260,11 +231,11 @@ fmadioCaptureBps OBJECT-TYPE
 ::= { fmadioCapture 16 }
 
 
-fmadioCapturePps OBJECT-TYPE
+fmadioCapturePps NOTIFICATION-TYPE 
     SYNTAX     	Counter64	
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Current Capture Packets per Second"
+    DESCRIPTION "FMADIO Current Capture Packets per Second"
 
 ::= { fmadioCapture 17 }
 
@@ -274,11 +245,11 @@ fmadioCapturePps OBJECT-TYPE
 -- current state 
 --
 
-fmadioCaptureEnable OBJECT-TYPE
+fmadioCaptureEnable NOTIFICATION-TYPE 
     SYNTAX     	Integer32	
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "Capture Currently Enabled"
+    DESCRIPTION "FMADIO Capture Currently Enabled"
 
 ::= { fmadioCapture 18 }
 
@@ -286,11 +257,11 @@ fmadioCaptureEnable OBJECT-TYPE
 --  CPU temperature
 --
 
-fmadioCPUTemperature  OBJECT-TYPE
+fmadioCPUTemperature NOTIFICATION-TYPE  
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "CPU Temperature"
+    DESCRIPTION "FMADIO CPU Temperature"
 
 ::= { fmadioCapture 30 }
 
@@ -299,11 +270,11 @@ fmadioCPUTemperature  OBJECT-TYPE
 -- FAN Alert  
 --
 
-fmadioFANAlert  OBJECT-TYPE
+fmadioFANAlert  NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "FAN Alert"
+    DESCRIPTION "FMADIO FAN Alert"
 
 ::= { fmadioCapture 31 }
 
@@ -311,39 +282,21 @@ fmadioFANAlert  OBJECT-TYPE
 --  PSU Status
 --
 
-fmadioPSU0  OBJECT-TYPE
+fmadioPSU0  NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "PSU 0 Status"
+    DESCRIPTION "FMADIO PSU 0 Status"
 
 ::= { fmadioCapture 32 }
 
-fmadioPSU1  OBJECT-TYPE
+fmadioPSU1  NOTIFICATION-TYPE 
     SYNTAX      Integer32
     MAX-ACCESS  accessible-for-notify
     STATUS      current
-    DESCRIPTION "PSU 1 Status"
+    DESCRIPTION "FMADIO PSU 1 Status"
 
 ::= { fmadioCapture 33 }
 
-
---
--- misc
---
-
-fmadioNotificationLinkStatus OBJECT-TYPE
-    SYNTAX      SnmpAdminString
-    MAX-ACCESS  accessible-for-notify
-    STATUS      current
-    DESCRIPTION
-        "A simple string object, to act as an optional payload
-         for the netSnmpExampleHeartbeatNotification.  This varbind
-         is not part of the notification definition, so is optional
-         and need not be included in the notification payload. 
-         The value has no real meaning, but the romantically inclined
-         may take it to be the object of the sender's affection,
-         and hence the cause of the heart beating faster."
-::= { fmadioNotifications 2 }
 
 END
