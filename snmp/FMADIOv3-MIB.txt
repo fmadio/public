@@ -5,17 +5,17 @@ FMADIOv3-MIB DEFINITIONS ::= BEGIN
 --
 
 IMPORTS
-    MODULE-IDENTITY, NOTIFICATION-TYPE, OBJECT-TYPE, Integer32, enterprises FROM SNMPv2-SMI
-    SnmpAdminString                         FROM SNMP-FRAMEWORK-MIB
-    netSnmp                                 FROM NET-SNMP-MIB
-    InetAddressType, InetAddress            FROM INET-ADDRESS-MIB
+    MODULE-IDENTITY, NOTIFICATION-TYPE, OBJECT-TYPE, Integer32, Counter64, enterprises FROM SNMPv2-SMI
 ;
 
 fmadio MODULE-IDENTITY
-    LAST-UPDATED "200406150000Z"
+    LAST-UPDATED "202307250000Z"
     ORGANIZATION "fmad.io"
     CONTACT-INFO "email: support@fmad.io"
-    DESCRIPTION  "fmadio MIB for trap events"
+	DESCRIPTION  "fmadio MIB for trap events"
+	REVISION     "202307250000Z"
+    DESCRIPTION  
+				"initial trap release"
     ::= { enterprises 46891 }
 
 --
@@ -27,71 +27,88 @@ fmadioNotificationObjects          OBJECT IDENTIFIER ::= { fmadio 3 }
 
 fmadioCapture          		   OBJECT IDENTIFIER ::= { fmadio 4 }
 
+fmadioInt32 OBJECT-TYPE
+              SYNTAX  Integer32
+              MAX-ACCESS  read-only
+			  STATUS      current
+              DESCRIPTION
+                      "A unique value for each interface.  Its value
+                      ranges between 1 and the value of ifNumber.  The
+                      value for each interface must remain constant at
+                      least from one re-initialization of the entity's
+                      network management system to the next re-
+                      initialization."
+              ::= { fmadioScalars 1 }
 
+
+fmadioInt64 OBJECT-TYPE
+              SYNTAX  Counter64
+              MAX-ACCESS  read-only
+			  STATUS      current
+              DESCRIPTION
+                      "A unique value for each interface.  Its value
+                      ranges between 1 and the value of ifNumber.  The
+                      value for each interface must remain constant at
+                      least from one re-initialization of the entity's
+                      network management system to the next re-
+                      initialization."
+              ::= { fmadioScalars 2 }
 
 --
 --  Capture Link Status 
 --
 
-fmadioCapture0Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+fmadioCapture0Link NOTIFICATION-TYPE  
+	OBJECTS { fmadioInt32 }
     STATUS      current
-    DESCRIPTION "FMADIO Capture Link 0 Up"
-
+	DESCRIPTION "FMADIO Capture Link 0 Up"
+ 
 ::= { fmadioCapture 1 }
 
 fmadioCapture1Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 2 }
 
 fmadioCapture2Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 3 }
 
 fmadioCapture3Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 4 }
 
 fmadioCapture4Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 5 }
 
 fmadioCapture5Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 6 }
 
 fmadioCapture6Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Link 1 Up"
 
 ::= { fmadioCapture 7 }
 
 fmadioCapture7Link NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Link 1 Up"
 
@@ -104,8 +121,7 @@ fmadioCapture7Link NOTIFICATION-TYPE
 --
 
 fmadioCapturePacket NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Total Packets Captured"
 
@@ -113,8 +129,7 @@ fmadioCapturePacket NOTIFICATION-TYPE
 
 
 fmadioCaptureByte NOTIFICATION-TYPE
-    SYNTAX     	Counter64
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Total Bytes Captured"
 
@@ -122,8 +137,7 @@ fmadioCaptureByte NOTIFICATION-TYPE
 
 
 fmadioCaptureCache NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Total Bytes Cached waiting for writeback to magnetic storage"
 
@@ -131,8 +145,7 @@ fmadioCaptureCache NOTIFICATION-TYPE
 
 
 fmadioCaptureDrop NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Total Number of packet drops"
 
@@ -140,8 +153,7 @@ fmadioCaptureDrop NOTIFICATION-TYPE
 
 
 fmadioCaptureError NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Total Number of packet errors (e.g. FCS)"
 
@@ -149,8 +161,7 @@ fmadioCaptureError NOTIFICATION-TYPE
 
 
 fmadioCaptureOverflow NOTIFICATION-TYPE 
-    SYNTAX      Counter64	
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Total Bytes Cache Overflow/lost"
 
@@ -162,56 +173,49 @@ fmadioCaptureOverflow NOTIFICATION-TYPE
 --
 
 fmadioDiskFreeSystem NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Disk Bytes Free on /mnt/system"
 
 ::= { fmadioCapture 20 }
 
 fmadioDiskFreeStore0 NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Disk Bytes Free on /mnt/store0"
 
 ::= { fmadioCapture 21 }
 
 fmadioDiskFreeStore1 NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+ 	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Disk Bytes Free on /mnt/store1"
 
 ::= { fmadioCapture 22 }
 
 fmadioDiskFreeRemote0 NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+ 	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Disk Bytes Free on /mnt/remote0"
 
 ::= { fmadioCapture 23 }
 
 fmadioDiskFreeRemote1 NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+ 	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Disk Bytes Free on /mnt/remote1"
 
 ::= { fmadioCapture 24 }
 
 fmadioDiskError NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+ 	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Disk Total Errors"
 
 ::= { fmadioCapture 25 }
 
 fmadioDiskSMART NOTIFICATION-TYPE 
-    SYNTAX     	Counter64 
-    MAX-ACCESS  accessible-for-notify
+  	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Disk Total SMART Errors"
 
@@ -223,8 +227,7 @@ fmadioDiskSMART NOTIFICATION-TYPE
 --
 
 fmadioCaptureBps NOTIFICATION-TYPE 
-    SYNTAX     	Counter64
-    MAX-ACCESS  accessible-for-notify
+  	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "Current Capture Bits per Second"
 
@@ -232,8 +235,7 @@ fmadioCaptureBps NOTIFICATION-TYPE
 
 
 fmadioCapturePps NOTIFICATION-TYPE 
-    SYNTAX     	Counter64	
-    MAX-ACCESS  accessible-for-notify
+ 	OBJECTS { fmadioInt64 }
     STATUS      current
     DESCRIPTION "FMADIO Current Capture Packets per Second"
 
@@ -246,8 +248,7 @@ fmadioCapturePps NOTIFICATION-TYPE
 --
 
 fmadioCaptureEnable NOTIFICATION-TYPE 
-    SYNTAX     	Integer32	
-    MAX-ACCESS  accessible-for-notify
+  	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO Capture Currently Enabled"
 
@@ -258,8 +259,7 @@ fmadioCaptureEnable NOTIFICATION-TYPE
 --
 
 fmadioCPUTemperature NOTIFICATION-TYPE  
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+  	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO CPU Temperature"
 
@@ -271,8 +271,7 @@ fmadioCPUTemperature NOTIFICATION-TYPE
 --
 
 fmadioFANAlert  NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO FAN Alert"
 
@@ -283,16 +282,14 @@ fmadioFANAlert  NOTIFICATION-TYPE
 --
 
 fmadioPSU0  NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO PSU 0 Status"
 
 ::= { fmadioCapture 32 }
 
 fmadioPSU1  NOTIFICATION-TYPE 
-    SYNTAX      Integer32
-    MAX-ACCESS  accessible-for-notify
+	OBJECTS { fmadioInt32 }
     STATUS      current
     DESCRIPTION "FMADIO PSU 1 Status"
 
